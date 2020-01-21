@@ -11,10 +11,12 @@ class App extends Component {
       activeItem: {
         title: "",
         description: "",
-        completed: false
+        date: "",
+        image: ""
       },
       blogList: [],
     };
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   refreshList = () => {
@@ -28,16 +30,39 @@ class App extends Component {
     this.refreshList();
   }
 
+  handleOnClick(item) {
+    console.log(item);
+    /*
+    this.setState({
+      activeItem: {
+        title: "",
+        description: "",
+        date: "",
+        image: ""
+      }
+    }) */
+  }
+
+  renderBlogList() {
+    return (
+    this.state.blogList.map(item => (
+      <BlogContainer
+        key={item.id}
+        handleOnClick={this.handleOnClick}
+        item={item}
+      />
+    )));
+  }
+
   render() {
     return (
-      this.state.blogList.map(item => (
-        <BlogContainer
-          title={item.title}
-          description={item.description}
-          date={item.date}
-          image={item.image}
-        />
-      ))
+      <div className="container">
+        <div className="header-container">
+          <h1>Jane's Cat Blog</h1>
+          <p>I write about my two cats Fluffina and Kitty Kitty. 🐱🐱</p>
+        </div>
+        {this.renderBlogList()}
+      </div>
     );
   }
 }
