@@ -18,11 +18,11 @@ export default class CustomModal extends Component {
         item,
         closeModal } = this.props;
     return (
-        <div className="modal-container blog-post">
+        <div className="fade-in modal-container blog-post">
             <h1>{item.title}</h1>
             <p>{this.createMinutesString()}</p>
             <p>{item.description}</p>
-            <img src={item.image}/>
+            <img alt="Blog post image" src={item.image}/>
             <p>{item.text}</p> 
             <div className="modal-btn-container">
                 <button className="modal-btn">{this.createLikesString()}</button>

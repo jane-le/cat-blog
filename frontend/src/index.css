@@ -51,8 +51,8 @@ body p {
 
 .blog-post img {
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   border-radius: 20px;
 }
 
@@ -133,4 +133,16 @@ body p {
 
 .modal-btn:hover {
   background-color: #DCD0C0 ;
+}
+.fade-in {
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+    -o-animation: fadein 1s; /* Opera < 12.1 */
+      animation: fadein 1s;
+}
+
+@keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
 }

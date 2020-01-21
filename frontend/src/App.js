@@ -54,8 +54,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="header-container">
+      <div className="fade-in container">
+        <div className="fade-in header-container">
           <h1>Jane's Cat Blog</h1>
           <p>I write about my two cats Fluffina and Kitty Kitty. 🐱🐱</p>
         </div>
