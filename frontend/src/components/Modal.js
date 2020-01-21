@@ -1,77 +1,34 @@
 import React, { Component } from "react";
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Form,
-    FormGroup,
-    Input,
-    Label
-} from "reactstrap";
 
 export default class CustomModal extends Component {
-    constructor(props) {
-    super(props);
-    this.state = {
-        activeItem: this.props.activeItem
-    };
+    createMinutesString() {
+        const {item} = this.props; 
+        const numMin = (item.text.length / 150)
+        const teaCup = "🍵 "
+        return(item.date + " • " + teaCup.repeat(numMin+1) + numMin.toFixed(0).toString() + " min read"); 
+        
     }
-    handleChange = e => {
-    let { name, value } = e.target;
-    if (e.target.type === "checkbox") {
-        value = e.target.checked;
+
+    createLikesString() {
+        const {item} = this.props;
+        return("❤️ " + item.likes.toString());
     }
-    const activeItem = { ...this.state.activeItem, [name]: value };
-    this.setState({ activeItem });
-    };
     render() {
-    const { toggle, onSave } = this.props;
+    const { 
+        item,
+        closeModal } = this.props;
     return (
-        <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Todo Item </ModalHeader>
-        <ModalBody>
-            <Form>
-            <FormGroup>
-                <Label for="title">Title</Label>
-                <Input
-                type="text"
-                name="title"
-                value={this.state.activeItem.title}
-                onChange={this.handleChange}
-                placeholder="Enter Todo Title"
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label for="description">Description</Label>
-                <Input
-                type="text"
-                name="description"
-                value={this.state.activeItem.description}
-                onChange={this.handleChange}
-                placeholder="Enter Todo description"
-                />
-            </FormGroup>
-            <FormGroup check>
-                <Label for="completed">
-                <Input
-                    type="checkbox"
-                    name="completed"
-                    checked={this.state.activeItem.completed}
-                    onChange={this.handleChange}
-                />
-                Completed
-                </Label>
-            </FormGroup>
-            </Form>
-        </ModalBody>
-        <ModalFooter>
-            <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-            Save
-            </Button>
-        </ModalFooter>
-        </Modal>
+        <div className="modal-container blog-post">
+            <h1>{item.title}</h1>
+            <p>{this.createMinutesString()}</p>
+            <p>{item.description}</p>
+            <img src={item.image}/>
+            <p>{item.text}</p> 
+            <div className="modal-btn-container">
+                <button className="modal-btn">{this.createLikesString()}</button>
+                <button onClick={() => closeModal()} className="modal-btn">✖️</button>
+            </div>
+        </div>
     );
     }
 }

@@ -8,15 +8,13 @@ class App extends Component {
     super(props);
     this.state = {
       viewCompleted: false,
-      activeItem: {
-        title: "",
-        description: "",
-        date: "",
-        image: ""
-      },
+      activeItem: {},
       blogList: [],
+      openModal: false,
     };
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    
   }
 
   refreshList = () => {
@@ -29,18 +27,18 @@ class App extends Component {
   componentDidMount() {
     this.refreshList();
   }
+  closeModal() {
+    this.setState({
+      openModal: false,
+    })
+  }
 
   handleOnClick(item) {
-    console.log(item);
-    /*
     this.setState({
-      activeItem: {
-        title: "",
-        description: "",
-        date: "",
-        image: ""
-      }
-    }) */
+      activeItem: item,
+      openModal: true,
+    }) 
+    console.log('done!');
   }
 
   renderBlogList() {
@@ -61,7 +59,10 @@ class App extends Component {
           <h1>Jane's Cat Blog</h1>
           <p>I write about my two cats Fluffina and Kitty Kitty. 🐱🐱</p>
         </div>
-        {this.renderBlogList()}
+        {!this.state.openModal && this.renderBlogList()}
+        {this.state.openModal && 
+          <Modal closeModal={this.closeModal} item={this.state.activeItem}/>
+          }
       </div>
     );
   }
